@@ -43,7 +43,7 @@ Dự án này bao gồm:
 4. **Chạy chương trình kiểm tra:**
 
    ```bash
-   ./TTest
+   ./Test
    ```
 
    Kết quả ví dụ:
