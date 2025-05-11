@@ -84,3 +84,73 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
 IN THE SOFTWARE.
 ```
+## 🌳 Tạo Device Tree Overlay cho BMP180 (Tuỳ chọn nâng cao)
+
+Để tương tác với driver BMP180 bằng Device Tree Overlay, bạn có thể tạo một overlay đơn giản để ánh xạ thiết bị vào hệ thống I2C.
+
+### 📁 Bước 1: Tạo file overlay (.dts)
+
+Tạo một file tên `bmp180-overlay.dts`:
+
+```dts
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2835";
+
+    fragment@0 {
+        target = <&i2c1>;
+        __overlay__ {
+            bmp180@77 {
+                compatible = "bmp180";
+                reg = <0x77>;
+            };
+        };
+    };
+};
+```
+
+> Lưu ý: `0x77` là địa chỉ I2C mặc định của BMP180.
+
+### ⚙️ Bước 2: Biên dịch Overlay
+
+Dùng `dtc` (Device Tree Compiler) để biên dịch:
+
+```bash
+dtc -@ -I dts -O dtb -o bmp180.dtbo bmp180-overlay.dts
+```
+
+### 📦 Bước 3: Cài Overlay
+
+Chép file `.dtbo` vào thư mục overlays của boot:
+
+```bash
+sudo cp bmp180.dtbo /boot/overlays/
+```
+
+Chỉnh sửa file cấu hình `/boot/config.txt` để nạp overlay lúc khởi động:
+
+```bash
+sudo nano /boot/config.txt
+```
+
+Thêm dòng sau vào cuối file:
+
+```
+dtoverlay=bmp180
+```
+
+Khởi động lại hệ thống:
+
+```bash
+sudo reboot
+```
+
+Sau khi khởi động, bạn có thể kiểm tra overlay đã nạp chưa bằng:
+
+```bash
+dmesg | grep bmp180
+```
+
+> Nếu bạn sử dụng Device Tree, driver kernel có thể tự động tạo `/dev/bmp180` nếu cấu hình đúng.
