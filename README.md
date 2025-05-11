@@ -48,8 +48,8 @@ Dự án này bao gồm:
 
    Kết quả ví dụ:
    ```
-   Nhiệt độ: 25.3°C
-   Áp suất: 55.0Pa
+   Nhiệt độ: 25.3 °C
+   Áp suất: 55 Pa
    ```
 
 5. **Gỡ module khi không cần nữa:**
