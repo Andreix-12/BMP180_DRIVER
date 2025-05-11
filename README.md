@@ -48,7 +48,8 @@ Dự án này bao gồm:
 
    Kết quả ví dụ:
    ```
-   Temp = 25.3 C
+   Nhiệt độ: 25.3°C
+   Áp suất: 55.0Pa
    ```
 
 5. **Gỡ module khi không cần nữa:**
