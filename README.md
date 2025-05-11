@@ -4,7 +4,7 @@
 ## Giới thiệu
 
 Dự án này bao gồm:
-- **File `BMP180.c`**: driver kernel space cho cảm biến BMP180 (nhiệt độ và áp suất).
+- **File `bmp180.c`**: driver kernel space cho cảm biến BMP180 (nhiệt độ và áp suất).
 - **File `Test.c`**: chương trình không gian người dùng (user-space) để đọc nhiệt độ từ BMP180 thông qua thiết bị `/dev/bmp180`.
 - **Makefile**: để biên dịch cả module kernel và chương trình test.
 
@@ -43,7 +43,7 @@ Dự án này bao gồm:
 4. **Chạy chương trình kiểm tra:**
 
    ```bash
-   ./test
+   ./TTest
    ```
 
    Kết quả ví dụ:
