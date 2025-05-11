@@ -14,12 +14,22 @@ int main() {
         return 1;
     }
 
-    int temp = 0;
+    int temp = 0, press = 0;
+
     if (ioctl(fd, bmp180_IOCTL_READ_TEMP, &temp) == -1) {
         perror("ioctl read temp");
+        close(fd);
         return 1;
     }
-    printf("Temp = %.1f C\n", temp / 10.0);
+
+    if (ioctl(fd, bmp180_IOCTL_READ_PRESS, &press) == -1) {
+        perror("ioctl read pressure");
+        close(fd);
+        return 1;
+    }
+
+    printf("Nhiệt độ: %.1f °C\n", temp / 10.0);
+    printf("Áp suất: %d Pa\n", press);
 
     close(fd);
     return 0;
